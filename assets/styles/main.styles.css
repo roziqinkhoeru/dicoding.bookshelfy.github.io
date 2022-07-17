@@ -9,10 +9,11 @@
 
   /* color */
   --black: #000000;
-  --white: #ffffff;
+  --chinese-black: #141318;
+  --iris: #5553c0;
   --light-blue: #6662fd;
   --smoky-black: #0e0e10;
-  --chinese-black: #141318;
+  --white: #ffffff;
 }
 
 /* ===== global ===== */
@@ -25,12 +26,111 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  color: var(--white);
+  font-weight: 400;
 }
 
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ===== nav ===== */
 nav {
   width: 100%;
   position: sticky;
   top: 0;
   z-index: 9999;
   background-color: var(--light-blue);
+}
+.container_nav {
+  width: 100%;
+  max-width: 81rem;
+  margin: 0 auto;
+  padding: 1rem 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav_logo {
+  display: flex;
+  align-items: flex-end;
+}
+.nav_logo img {
+  height: 2rem;
+  margin-right: 0.75rem;
+}
+.nav_logo_title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+}
+.nav_menu {
+  display: flex;
+  align-items: center;
+}
+.nav_menu ul {
+  display: flex;
+  align-items: center;
+}
+.nav_menu_item {
+  margin-right: 1.5rem;
+  cursor: pointer;
+}
+.nav_menu_item svg {
+  font-size: 1.125rem;
+}
+.nav_menu_item path {
+  transition: all 0.2s ease-in-out;
+}
+.nav_menu_item path:hover {
+  color: #ffffff99;
+}
+.nav_profile {
+  background-color: var(--iris);
+  border-radius: 9999px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.1s ease-in-out;
+}
+.nav_profile:hover {
+  border: 1px solid #ffffffcc;
+}
+.nav_profile_container {
+  padding: 0.5rem 0.875rem;
+  display: flex;
+  align-items: center;
+}
+.nav_profile_img {
+  padding: 0.5rem;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 50%;
+  background-color: #f4db89;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.625rem;
+}
+.nav_profile_img p {
+  line-height: 1;
+  font-weight: 700;
+  color: #00000099;
+}
+.nav_profile_name p {
+  font-weight: 600;
+  margin-right: 0.875rem;
+}
+.nav_profile_container svg {
+  margin-right: 0.5rem;
+  font-size: 1rem;
 }
