@@ -112,23 +112,38 @@
         <section id="bookForm">
           <h2 class="title_section">Masukkan Buku Baru</h2>
           <div class="card_container">
-            <div class="card_body">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi
-                maiores maxime impedit voluptatem commodi, facilis consectetur
-                eveniet laboriosam nulla deserunt eius autem odio in accusamus
-                non saepe quam quos rerum?
-              </p>
-            </div>
-            <hr />
-            <div class="card_footer"></div>
+            <form action="#" method="post">
+              <div class="card_body">
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi
+                  maiores maxime impedit voluptatem commodi, facilis consectetur
+                  eveniet laboriosam nulla deserunt eius autem odio in accusamus
+                  non saepe quam quos rerum?
+                </p>
+              </div>
+              <hr />
+              <div class="card_footer">
+                <div class="card_footer_container">
+                  <button type="reset" class="btn btn_reset">Reset</button>
+                  <button type="submit" class="btn btn_submit">
+                    Tambahkan
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </section>
 
         <!-- ready book section -->
         <section id="readyBook">
-          <h2 class="title_section">Ready Books</h2>
           <div class="card_container">
+            <div class="card_header">
+              <h3 class="title_card">
+                <span>Belum selesai dibaca</span
+                ><i class="fa-solid fa-circle-question"></i>
+              </h3>
+            </div>
+            <hr />
             <div class="card_body">
               <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi
@@ -144,8 +159,14 @@
 
         <!-- finished book section -->
         <section id="finishedBook">
-          <h2 class="title_section">Finished Books</h2>
           <div class="card_container">
+            <div class="card_header">
+              <h3 class="title_card">
+                <span>Selesai dibaca</span
+                ><i class="fa-solid fa-circle-question"></i>
+              </h3>
+            </div>
+            <hr />
             <div class="card_body">
               <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi
