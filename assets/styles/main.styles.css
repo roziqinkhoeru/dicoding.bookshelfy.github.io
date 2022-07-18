@@ -58,7 +58,7 @@ nav {
 }
 .container_nav {
   width: 100%;
-  max-width: 81rem;
+  max-width: 86rem;
   margin: 0 auto;
   padding: 1rem 4.5rem;
   display: flex;
@@ -74,6 +74,10 @@ nav {
   font-weight: 700;
   color: var(--white);
   line-height: 1;
+  transition: all 0.2s ease-in-out;
+}
+.nav_logo_title:hover {
+  color: #ffffffcc;
 }
 .nav_menu {
   display: flex;
@@ -93,18 +97,17 @@ nav {
 .nav_menu_item path {
   transition: all 0.2s ease-in-out;
 }
-.nav_menu_item path:hover {
+.nav_menu_item:hover path {
   color: #ffffff99;
 }
 .nav_profile {
   background-color: var(--iris);
   border-radius: 9999px;
   cursor: pointer;
-  border: 1px solid transparent;
   transition: all 0.1s ease-in-out;
 }
 .nav_profile:hover {
-  border: 1px solid #ffffffcc;
+  background-color: #4744c0;
 }
 .nav_profile_container {
   padding: 0.5rem 0.875rem;
@@ -144,7 +147,7 @@ header {
 .container_header {
   padding: 0 4.5rem;
   margin: 0 auto;
-  max-width: 68rem;
+  max-width: 70rem;
 }
 .header_nav {
   display: flex;
@@ -153,18 +156,24 @@ header {
 .header_nav_item {
   display: flex;
   align-items: center;
-  margin: 0 1.5rem;
+  margin: 0 1.125rem;
 }
 .header_nav_item a {
   display: block;
-  padding: 1.375rem 0.375rem 1.25rem;
+  padding: 1.125rem 0 0.875rem;
   border-bottom: 0.25rem solid transparent;
-  transition: all 0.2s ease-in-out;
-}
-.header_nav_item a:hover {
-  color: var(--white);
 }
 .header_nav_item.active a {
-  border-bottom: 0.25rem solid var(--iris);
+  border-bottom: 2px solid var(--iris);
+}
+.header_nav_item a span {
+  transition: all 0.2s ease-in-out;
+  padding: 0.4rem 0.625rem;
+  border-radius: 0.25rem;
+}
+.header_nav_item.active a span {
   color: var(--white);
+}
+.header_nav_item a span:hover {
+  background-color: #ffffff1a;
 }
