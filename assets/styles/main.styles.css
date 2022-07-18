@@ -245,10 +245,10 @@ section {
   padding: 1.125rem 1.5rem;
 }
 .card_body {
-  padding: 0.875rem 1.5rem;
+  padding: 1.5rem;
 }
 .card_footer {
-  padding: 0.875rem 1.5rem;
+  padding: 1rem 1.5rem;
 }
 .card_footer_container {
   display: flex;
@@ -256,7 +256,7 @@ section {
   justify-content: end;
 }
 .btn_reset {
-  margin-right: 1.875rem;
+  margin-right: 1.5rem;
   background-color: transparent;
 }
 .btn_reset:hover {
@@ -268,6 +268,29 @@ section {
 }
 .btn_submit:hover {
   background-color: #4744c0;
+}
+#formAddBook .card_body {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1.5rem 3rem;
+}
+.field_content:not(:last-child) {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.label_field {
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.input_field {
+  width: 100%;
+  border-radius: 0.4rem;
+  border: 0.125rem solid transparent;
+  padding: 0.625rem 1rem;
+  outline: none;
+  background-color: var(--chinese-black);
 }
 
 /* ===== footer ===== */
