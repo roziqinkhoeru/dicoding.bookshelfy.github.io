@@ -115,41 +115,49 @@
             <form action="#" method="post" id="formAddBook">
               <div class="card_body">
                 <!-- judul -->
-                <div class="field_content">
+                <div class="field_content" id="fieldJudul">
                   <label class="label_field" for="judul">Judul</label>
                   <input
                     class="input_field"
                     type="text"
                     name="judul"
                     id="judul"
+                    placeholder="Masukkan judul buku"
+                    required
                   />
                 </div>
                 <!-- penulis -->
-                <div class="field_content">
+                <div class="field_content" id="fieldPenulis">
                   <label class="label_field" for="penulis">Penulis</label>
                   <input
                     class="input_field"
                     type="text"
                     name="penulis"
                     id="penulis"
+                    placeholder="Masukkan nama penulis"
+                    required
                   />
                 </div>
                 <!-- tahun -->
-                <div class="field_content">
+                <div class="field_content" id="fieldTahun">
                   <label class="label_field" for="tahun">Tahun</label>
                   <input
                     class="input_field"
                     type="text"
                     name="tahun"
                     id="tahun"
+                    placeholder="Masukkan tahun terbit"
+                    required
                   />
                 </div>
-                <!-- checkbox selesai dibaca -->
-                <div class="field_content">
-                  <label class="label_field" for="selesai"
-                    >Selesai Dibaca</label
-                  >
-                  <input type="checkbox" name="selesai" id="selesai" />
+                <!-- select status -->
+                <div class="field_content" id="fieldStatus">
+                  <label class="label_field" for="status">Status Baca</label>
+                  <select class="input_field" name="status" id="status">
+                    <option value="" disabled>Pilih Status</option>
+                    <option value="selesai">Selesai</option>
+                    <option value="belum">Belum selesai</option>
+                  </select>
                 </div>
               </div>
               <hr />
