@@ -37,6 +37,11 @@
     display: none;
   }
 
+  .nav_dropdown_content hr,
+  .nav_dropdown_content .nav_dropdown_search {
+    display: block;
+  }
+
   /* ===== main ===== */
   /* ready and finished section */
   .card_body_container {
@@ -71,6 +76,10 @@
     padding: 0 0.875rem;
   }
 
+  .nav_dropdown_content {
+    width: 70%;
+  }
+
   /* ===== main ===== */
   /* form add book section */
   #fieldJudul,
@@ -100,5 +109,9 @@
   /* ===== navigation ===== */
   .btn_dropdown_menu svg {
     padding: 0 0.375rem;
+  }
+
+  .nav_dropdown_content {
+    width: 80%;
   }
 }
