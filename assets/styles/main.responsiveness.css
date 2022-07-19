@@ -1,6 +1,15 @@
 /* ========== END SETTING ========== */
 @media screen and (max-width: 990px) {
   /* ===== main ===== */
+  /* form add book section */
+  #fieldJudul,
+  #fieldPenulis,
+  #fieldTahun,
+  #fieldStatus {
+    grid-column: span 3 / span 3;
+  }
+
+  /* ready and finished section */
   .card_body_container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.625rem;
@@ -9,6 +18,7 @@
 
 @media screen and (max-width: 767px) {
   /* ===== main ===== */
+  /* ready and finished section */
   .card_body_container {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
@@ -16,11 +26,21 @@
 
 @media screen and (max-width: 575px) {
   /* ===== main ===== */
+  /* form add book section */
+  #fieldJudul,
+  #fieldPenulis,
+  #fieldTahun,
+  #fieldStatus {
+    grid-column: span 6 / span 6;
+  }
+
   .container {
     max-width: 100%;
     margin: 0 auto;
     padding: 1rem 1.125rem;
   }
+
+  /* ready and finished section */
   .dropdown_setting {
     right: 1rem;
   }

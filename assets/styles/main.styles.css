@@ -653,7 +653,6 @@ footer {
 }
 
 nav,
-header,
-#bookForm {
+header {
   display: none;
 }
