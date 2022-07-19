@@ -1,5 +1,12 @@
 /* ========== END SETTING ========== */
 @media screen and (max-width: 990px) {
+  /* ===== navigation ===== */
+  .nav_menu_item:nth-child(2),
+  .nav_menu_item:nth-child(3),
+  .nav_menu_item:nth-child(4) {
+    display: none;
+  }
+
   /* ===== main ===== */
   /* form add book section */
   #fieldJudul,
@@ -17,6 +24,11 @@
 }
 
 @media screen and (max-width: 767px) {
+  /* ===== navigation ===== */
+  .nav_menu_item:nth-child(1) {
+    display: none;
+  }
+
   /* ===== main ===== */
   /* ready and finished section */
   .card_body_container {
@@ -25,6 +37,14 @@
 }
 
 @media screen and (max-width: 575px) {
+  /* ===== navigation ===== */
+  .container_nav {
+    padding: 0.75rem 1rem;
+  }
+  .nav_profile_name {
+    display: none;
+  }
+
   /* ===== header ===== */
   .container_header {
     padding: 0 1rem;
