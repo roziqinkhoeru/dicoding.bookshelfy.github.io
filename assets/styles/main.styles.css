@@ -643,3 +643,11 @@ footer {
 
   text-align: center;
 }
+
+/*  ========== SETTING ========== */
+nav,
+header,
+main {
+  display: none !important;
+}
+/* ========== END SETTING ========== */
