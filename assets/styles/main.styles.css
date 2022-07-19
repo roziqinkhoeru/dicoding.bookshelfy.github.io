@@ -513,8 +513,8 @@ section {
   flex-direction: column;
 }
 
-#readyBook .card_book_body {
-  margin-bottom: 0.25rem;
+#readyBook .card_book_body .card_book_body_content {
+  margin-bottom: 0.875rem;
 }
 
 #finishedBook .card_book_body .card_book_body_content {
@@ -654,7 +654,6 @@ footer {
 
 nav,
 header,
-#bookForm,
-#readyBook {
+#bookForm {
   display: none;
 }
