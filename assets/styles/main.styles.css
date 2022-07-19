@@ -501,15 +501,23 @@ section {
 .card_book_body {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   width: 100%;
+  height: 100%;
+}
+
+.card_book_body_content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 #readyBook .card_book_body {
   margin-bottom: 0.25rem;
 }
 
-#finishedBook .card_book_body {
+#finishedBook .card_book_body .card_book_body_content {
   margin-bottom: 1rem;
 }
 
@@ -556,7 +564,7 @@ section {
   position: absolute;
   z-index: -1;
   top: 2.9rem;
-  right: -8.75rem;
+  right: -4rem;
 
   display: flex;
   visibility: hidden;
@@ -644,10 +652,9 @@ footer {
   text-align: center;
 }
 
-/*  ========== SETTING ========== */
 nav,
 header,
-main {
-  display: none !important;
+#bookForm,
+#readyBook {
+  display: none;
 }
-/* ========== END SETTING ========== */
