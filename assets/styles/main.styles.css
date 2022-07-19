@@ -293,9 +293,16 @@ header {
 .header_nav_item {
   display: flex;
 
-  margin: 0 1.125rem;
+  padding: 0 1.125rem;
 
   align-items: center;
+}
+
+.header_nav_item:first-child {
+  padding-left: 0;
+}
+.header_nav_item:last-child {
+  padding-right: 0;
 }
 
 .header_nav_item a {
@@ -652,7 +659,6 @@ footer {
   text-align: center;
 }
 
-nav,
-header {
+nav {
   display: none;
 }

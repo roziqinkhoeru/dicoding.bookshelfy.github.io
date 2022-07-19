@@ -25,6 +25,17 @@
 }
 
 @media screen and (max-width: 575px) {
+  /* ===== header ===== */
+  .container_header {
+    padding: 0 1rem;
+  }
+  .header_nav {
+    overflow-x: auto;
+  }
+  .header_nav_item {
+    padding: 0 0.875rem;
+  }
+
   /* ===== main ===== */
   /* form add book section */
   #fieldJudul,
