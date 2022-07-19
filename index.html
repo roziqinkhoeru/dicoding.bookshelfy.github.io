@@ -67,11 +67,29 @@
         </a>
         <div class="nav_menu">
           <ul>
-            <li class="nav_menu_item">v1.0.0</li>
+            <li class="nav_menu_item">
+              <form action="#" method="post">
+                <!-- search input -->
+                <div class="field_search">
+                  <input
+                    type="text"
+                    name="search"
+                    id="search"
+                    placeholder="Cari buku disini"
+                    class="nav_search"
+                  />
+                  <!-- search button -->
+                  <button type="submit" class="nav_search_button">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </button>
+                </div>
+              </form>
+            </li>
             <li class="nav_menu_item">
               <i class="fa-solid fa-circle-question"></i>
             </li>
             <li class="nav_menu_item"><i class="fa-solid fa-gear"></i></li>
+            <li class="nav_menu_item">v1.0.0</li>
           </ul>
           <div class="nav_profile">
             <div class="nav_profile_container">
@@ -198,7 +216,7 @@
                     <button class="btn btn_submit">Selesai</button>
                   </div>
                   <div class="dropdown_setting">
-                    <button class="btn btn_delete">
+                    <button class="btn btn_delete btn_dropdown_setting">
                       <i class="fa-solid fa-trash-can"></i><span>Delete</span>
                     </button>
                   </div>
@@ -217,7 +235,7 @@
                     <button class="btn btn_submit">Selesai</button>
                   </div>
                   <div class="dropdown_setting">
-                    <button class="btn btn_delete">
+                    <button class="btn btn_delete btn_dropdown_setting">
                       <i class="fa-solid fa-trash-can"></i><span>Delete</span>
                     </button>
                   </div>
@@ -257,11 +275,11 @@
                     </p>
                   </div>
                   <div class="dropdown_setting">
-                    <button class="btn btn_switch">
+                    <button class="btn btn_switch btn_dropdown_setting">
                       <i class="fa-solid fa-shuffle"></i>
                       <span>Belum selesai</span>
                     </button>
-                    <button class="btn btn_delete">
+                    <button class="btn btn_delete btn_dropdown_setting">
                       <i class="fa-solid fa-trash-can"></i><span>Delete</span>
                     </button>
                   </div>
