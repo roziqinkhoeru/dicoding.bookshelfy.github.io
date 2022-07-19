@@ -12,7 +12,7 @@ const toggleDropdownSetting = (btn, menu) => {
     });
   }
 };
-
+// hide dropdown setting card book when clicking a button dropdowns
 const closeDropdownSetting = (btn, menu) => {
   for (let i = 0; i < btn.length; i++) {
     btn[i].addEventListener("click", () => {
@@ -22,11 +22,23 @@ const closeDropdownSetting = (btn, menu) => {
     });
   }
 };
+// hide dropdown setting card book when clicking outside of the dropdown setting card book
+const closeDropdownOutside = (btn, menu) => {
+  for (let i = 0; i < btn.length; i++) {
+    window.addEventListener("click", (e) => {
+      if (btn[i].contains(e.target)) {
+      } else {
+        menu[i].classList.remove("show");
+      }
+    });
+  }
+};
 
-// call function toggle show dropdown setting card book
+// declare a variable
 const dropdownCard = document.getElementsByClassName("dropdown_setting"),
   btnSetting = document.getElementsByClassName("setting_book"),
   btnDropdownSetting = document.getElementsByClassName("btn_dropdown_setting");
-
+// call function toggle show dropdown setting card book
 toggleDropdownSetting(btnSetting, dropdownCard);
 closeDropdownSetting(btnDropdownSetting, dropdownCard);
+closeDropdownOutside(btnSetting, dropdownCard);
