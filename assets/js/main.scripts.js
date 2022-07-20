@@ -17,10 +17,25 @@ const toggleNavMenu = (btn, menu, screens) => {
   });
 };
 
+// hide nav menu dropdown when clicking nav dropdown item
+const closeNavMenu = (btn, menu, screens) => {
+  for (let i = 0; i < btn.length; i++) {
+    btn[i].addEventListener("click", () => {
+      menu.classList.remove("active");
+      screens.classList.remove("active");
+      screens.style.pointerEvents = "none";
+      document.querySelector("html").style.overflow = "auto";
+      document.querySelector("html").style.height = "auto";
+    });
+  }
+};
+
 // declare variable
 const btnNavMenu = document.querySelector(".btn_dropdown_menu"),
   navDropdownContent = document.querySelector(".nav_dropdown_content"),
-  navScreen = document.querySelector(".nav_dropdown_screen");
+  navScreen = document.querySelector(".nav_dropdown_screen"),
+  navDropdownItem = document.querySelectorAll(".nav_dropdown_item");
 
 // call func
 toggleNavMenu(btnNavMenu, navDropdownContent, navScreen);
+closeNavMenu(navDropdownItem, navDropdownContent, navScreen);
