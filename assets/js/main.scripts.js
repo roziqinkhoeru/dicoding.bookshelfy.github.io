@@ -1,41 +1,55 @@
-// toggle navigation menu dropdown
-const toggleNavMenu = (btn, menu, screens) => {
-  btn.addEventListener("click", () => {
-    menu.classList.toggle("active");
-    screens.classList.toggle("active");
-    screens.style.pointerEvents = "all";
-    document.querySelector("html").style.overflow = "hidden";
-    document.querySelector("html").style.height = "100%";
+// load DOM Content
+document.addEventListener("DOMContentLoaded", function () {
+  const formAddBook = document.getElementById("formAddBook");
+  formAddBook.addEventListener("submit", function (event) {
+    event.preventDefault();
+    alert("berhasil");
+    addBook();
   });
-
-  screens.addEventListener("click", () => {
-    screens.classList.remove("active");
-    screens.style.pointerEvents = "none";
-    menu.classList.remove("active");
-    document.querySelector("html").style.overflow = "auto";
-    document.querySelector("html").style.height = "auto";
-  });
-};
-
-// hide nav menu dropdown when clicking nav dropdown item
-const closeNavMenu = (btn, menu, screens) => {
-  for (let i = 0; i < btn.length; i++) {
-    btn[i].addEventListener("click", () => {
-      menu.classList.remove("active");
-      screens.classList.remove("active");
-      screens.style.pointerEvents = "none";
-      document.querySelector("html").style.overflow = "auto";
-      document.querySelector("html").style.height = "auto";
-    });
-  }
-};
+});
 
 // declare variable
-const btnNavMenu = document.querySelector(".btn_dropdown_menu"),
-  navDropdownContent = document.querySelector(".nav_dropdown_content"),
-  navScreen = document.querySelector(".nav_dropdown_screen"),
-  navDropdownItem = document.querySelectorAll(".nav_dropdown_item");
+const bookData = [];
+const RENDER_EVENT = "render-book";
 
-// call func
-toggleNavMenu(btnNavMenu, navDropdownContent, navScreen);
-closeNavMenu(navDropdownItem, navDropdownContent, navScreen);
+// generate ID
+const geneateId = () => {
+  return +new Date();
+};
+
+// generate object book
+const generateBookObject = (id, title, author, year, status) => {
+  return {
+    id,
+    title,
+    author,
+    year,
+    status,
+  };
+};
+
+// method addBook
+const addBook = () => {
+  const titleBook = document.getElementById("judul").value;
+  const authorBook = document.getElementById("penulis").value;
+  const yearBook = document.getElementById("tahun").value;
+  const statusBook = document.getElementById("status").value;
+
+  const idBook = geneateId();
+  const book = generateBookObject(
+    idBook,
+    titleBook,
+    authorBook,
+    yearBook,
+    statusBook
+  );
+
+  bookData.push(book);
+
+  document.dispatchEvent(new Event(RENDER_EVENT));
+};
+
+// render book
+document.addEventListener(RENDER_EVENT, () => {
+  console.log(bookData);
+});
