@@ -65,6 +65,13 @@ const makeBookshelf = (bookObject) => {
   const btnDelete = document.createElement("button");
   const trashIcon = document.createElement("i");
   const btnDeleteValue = document.createElement("span");
+  const btnSwitch = document.createElement("button");
+  const switchIcon = document.createElement("i");
+  const btnSwitchValue = document.createElement("span");
+  const statusBook = document.createElement("div");
+  const statusBookText = document.createElement("p");
+  const statusIcon = document.createElement("i");
+  const statusBookValue = document.createElement("span");
 
   cardBook.classList.add("card_book");
   cardBookBody.classList.add("card_book_body");
@@ -79,18 +86,32 @@ const makeBookshelf = (bookObject) => {
   dropdownSetting.classList.add("dropdown_setting");
   btnDelete.classList.add("btn", "btn_delete", "btn_dropdown_setting");
   trashIcon.classList.add("fa-solid", "fa-trash-can");
+  btnSwitch.classList.add("btn", "btn_switch", "btn_dropdown_setting");
+  switchIcon.classList.add("fa-solid", "fa-shuffle");
+  statusBook.classList.add("status_book");
+  statusIcon.classList.add("fa-solid", "fa-check-double");
 
-  titleBook.innerHTML = bookObject.title;
-  authorBook.innerHTML = bookObject.author;
-  yearBook.innerHTML = bookObject.year;
-  btnDone.innerHTML = "Selesai";
-  btnDeleteValue.innerHTML = "Hapus";
+  titleBook.innerText = bookObject.title;
+  authorBook.innerText = bookObject.author;
+  yearBook.innerText = bookObject.year;
+  btnDone.innerText = "Selesai";
+  btnDeleteValue.innerText = "Hapus";
+  btnSwitchValue.innerText = "Belum selesai";
+  statusBookValue.innerText = "Selesai";
 
   cardBookBodyContent.append(titleBook, authorBook, yearBook);
   buttonBook.append(btnDone);
-  cardBookBody.append(cardBookBodyContent, buttonBook);
+  statusBook.appendChild(statusBookText).append(statusIcon, statusBookValue);
   settingBook.append(dotThreeIcon);
-  dropdownSetting.appendChild(btnDelete).append(trashIcon, btnDeleteValue);
+  btnDelete.append(trashIcon, btnDeleteValue);
+  btnSwitch.append(switchIcon, btnSwitchValue);
+  if (bookObject.status === "belum") {
+    cardBookBody.append(cardBookBodyContent, buttonBook);
+    dropdownSetting.append(btnDelete);
+  } else {
+    cardBookBody.append(cardBookBodyContent, statusBook);
+    dropdownSetting.append(btnSwitch, btnDelete);
+  }
 
   cardBook.setAttribute("id", `book-${bookObject.id}`);
   cardBook.append(cardBookBody, settingBook, dropdownSetting);
@@ -103,8 +124,17 @@ document.addEventListener(RENDER_EVENT, () => {
   const containerReadyBook = document.getElementById("containerReadyBook");
   containerReadyBook.innerHTML = "";
 
+  const containerFinishedBook = document.getElementById(
+    "containerFinishedBook"
+  );
+  containerFinishedBook.innerHTML = "";
+
   for (const bookList of bookData) {
     const bookElement = makeBookshelf(bookList);
-    containerReadyBook.append(bookElement);
+    if (bookList.status === "belum") {
+      containerReadyBook.appendChild(bookElement);
+    } else {
+      containerFinishedBook.appendChild(bookElement);
+    }
   }
 });
