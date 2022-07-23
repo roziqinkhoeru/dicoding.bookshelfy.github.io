@@ -1,16 +1,17 @@
-// load DOM Content
-document.addEventListener("DOMContentLoaded", function () {
-  const formAddBook = document.getElementById("formAddBook");
-  formAddBook.addEventListener("submit", function (event) {
-    event.preventDefault();
-    alert("Selamat! Buku berhasil ditambahkan");
-    addBook();
-  });
-});
-
 // declare variable
 const bookData = [];
-const RENDER_EVENT = "render-book";
+(RENDER_EVENT = "render-book"),
+  (formAddBook = document.getElementById("formAddBook")),
+  (containerReadyBook = document.getElementById("containerReadyBook")),
+  (containerFinishedBook = document.getElementById("containerFinishedBook")),
+  (titleBook = document.getElementById("judul")),
+  (authorBook = document.getElementById("penulis")),
+  (yearBook = document.getElementById("tahun")),
+  (statusBook = document.getElementById("status"));
+
+//inisialiasi key untuk session storage
+const sessionReadyBookKey = "SESSION_READY_BOOK",
+  sessionFinishedBookKey = "SESSION_FINISHED_BOOK";
 
 // generate ID
 const generateId = () => {
@@ -28,50 +29,29 @@ const generateBookObject = (id, title, author, year, status) => {
   };
 };
 
-// method addBook
-const addBook = () => {
-  const titleBook = document.getElementById("judul").value;
-  const authorBook = document.getElementById("penulis").value;
-  const yearBook = document.getElementById("tahun").value;
-  const statusBook = document.getElementById("status").value;
-
-  const idBook = generateId();
-  const book = generateBookObject(
-    idBook,
-    titleBook,
-    authorBook,
-    yearBook,
-    statusBook
-  );
-
-  bookData.push(book);
-
-  document.dispatchEvent(new Event(RENDER_EVENT));
-};
-
 // method make bookshelf
 const makeBookshelf = (bookObject) => {
-  const cardBook = document.createElement("div");
-  const cardBookBody = document.createElement("div");
-  const cardBookBodyContent = document.createElement("div");
-  const titleBook = document.createElement("p");
-  const authorBook = document.createElement("p");
-  const yearBook = document.createElement("p");
-  const buttonBook = document.createElement("div");
-  const btnDone = document.createElement("button");
-  const settingBook = document.createElement("div");
-  const dotThreeIcon = document.createElement("i");
-  const dropdownSetting = document.createElement("div");
-  const btnDelete = document.createElement("button");
-  const trashIcon = document.createElement("i");
-  const btnDeleteValue = document.createElement("span");
-  const btnSwitch = document.createElement("button");
-  const switchIcon = document.createElement("i");
-  const btnSwitchValue = document.createElement("span");
-  const statusBook = document.createElement("div");
-  const statusBookText = document.createElement("p");
-  const statusIcon = document.createElement("i");
-  const statusBookValue = document.createElement("span");
+  const cardBook = document.createElement("div"),
+    cardBookBody = document.createElement("div"),
+    cardBookBodyContent = document.createElement("div"),
+    titleBook = document.createElement("p"),
+    authorBook = document.createElement("p"),
+    yearBook = document.createElement("p"),
+    buttonBook = document.createElement("div"),
+    btnDone = document.createElement("button"),
+    settingBook = document.createElement("div"),
+    dotThreeIcon = document.createElement("i"),
+    dropdownSetting = document.createElement("div"),
+    btnDelete = document.createElement("button"),
+    trashIcon = document.createElement("i"),
+    btnDeleteValue = document.createElement("span"),
+    btnSwitch = document.createElement("button"),
+    switchIcon = document.createElement("i"),
+    btnSwitchValue = document.createElement("span"),
+    statusBook = document.createElement("div"),
+    statusBookText = document.createElement("p"),
+    statusIcon = document.createElement("i"),
+    statusBookValue = document.createElement("span");
 
   cardBook.classList.add("card_book");
   cardBookBody.classList.add("card_book_body");
@@ -119,14 +99,39 @@ const makeBookshelf = (bookObject) => {
   return cardBook;
 };
 
+// method addBook
+const addBook = () => {
+  const titleBookVal = titleBook.value;
+  const authorBookVal = authorBook.value;
+  const yearBookVal = yearBook.value;
+  const statusBookVal = statusBook.value;
+
+  const idBook = generateId();
+  const book = generateBookObject(
+    idBook,
+    titleBookVal,
+    authorBookVal,
+    yearBookVal,
+    statusBookVal
+  );
+
+  bookData.push(book);
+
+  document.dispatchEvent(new Event(RENDER_EVENT));
+};
+
+// load DOM Content
+document.addEventListener("DOMContentLoaded", function () {
+  formAddBook.addEventListener("submit", function (event) {
+    event.preventDefault();
+    alert("Selamat! Buku berhasil ditambahkan");
+    addBook();
+  });
+});
+
 // render book
 document.addEventListener(RENDER_EVENT, () => {
-  const containerReadyBook = document.getElementById("containerReadyBook");
   containerReadyBook.innerHTML = "";
-
-  const containerFinishedBook = document.getElementById(
-    "containerFinishedBook"
-  );
   containerFinishedBook.innerHTML = "";
 
   for (const bookList of bookData) {
