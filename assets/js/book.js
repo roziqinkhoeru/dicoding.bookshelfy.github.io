@@ -7,25 +7,27 @@ const formAddBook = document.getElementById("formAddBook"),
   yearBook = document.getElementById("tahun"),
   statusBook = document.getElementById("status");
 
-// initiate key for session storage
-const sessionReadyBookKey = "SESSION_READY_BOOK",
-  sessionFinishedBookKey = "SESSION_FINISHED_BOOK";
+// initiate key for local storage
+const localReadyBookKey = "LOCAL_READY_BOOK",
+  localFinishedBookKey = "LOCAL_FINISHED_BOOK";
 
 window.addEventListener("load", () => {
   if (typeof Storage !== "undefined") {
-    if (sessionStorage.getItem(sessionReadyBookKey) === null) {
-      sessionStorage.setItem(sessionReadyBookKey, "");
+    if (localStorage.getItem(localReadyBookKey) === null) {
+      localStorage.setItem(localReadyBookKey, "");
     }
-    if (sessionStorage.getItem(sessionFinishedBookKey) === null) {
-      sessionStorage.setItem(sessionFinishedBookKey, "");
+    if (localStorage.getItem(localFinishedBookKey) === null) {
+      localStorage.setItem(localFinishedBookKey, "");
     }
   } else {
     alert("Browser yang Anda gunakan tidak mendukung Web Storage");
   }
 
   //inisialisasi semua nilai field pada dokumen yang menggunakan nilai dari web storage
-  containerReadyBook.innerText = sessionStorage.getItem(sessionReadyBookKey);
-  containerFinishedBook.innerText = localStorage.getItem(
-    sessionFinishedBookKey
-  );
+  containerReadyBook.innerText = localStorage.getItem(localReadyBookKey);
+  containerFinishedBook.innerText = localStorage.getItem(localFinishedBookKey);
 });
+
+// event submit
+// akan disimpan
+// akan ditampilkan
