@@ -1,7 +1,7 @@
 // initiate variable
 const books = [];
 const RENDER_EVENT = "render-bookshelf",
-  SAVED_EVENT = "saved-bookshelf",
+  // SAVED_EVENT = "saved-bookshelf",
   STORAGE_KEY = "BOOKSHELF_APPS";
 const formAddBook = document.getElementById("formAddBook"),
   containerReadyBook = document.getElementById("containerReadyBook"),
@@ -180,7 +180,7 @@ function saveData() {
     const bookParsed = JSON.stringify(books);
     localStorage.setItem(STORAGE_KEY, bookParsed);
 
-    document.dispatchEvent(new Event(SAVED_EVENT));
+    // document.dispatchEvent(new Event(SAVED_EVENT));
   }
 }
 
@@ -215,7 +215,12 @@ const addBook = () => {
 function deleteBook(idBook) {
   const bookTarget = findBookIndex(idBook);
   if (bookTarget === -1) return;
-  books.splice(bookTarget, 1);
+  const proceed = confirm(
+    `Apakah Anda yakin ingin menghapus buku ${books[bookTarget].title} secara permanen?`
+  );
+  if (proceed) {
+    books.splice(bookTarget, 1);
+  }
 
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
@@ -236,8 +241,12 @@ const addBookToFinished = (idBook) => {
 function undoBookFromFinished(idBook) {
   const bookTarget = findBook(idBook);
   if (bookTarget == null) return;
-
-  bookTarget.isFinished = false;
+  const proceed = confirm(
+    `Apakah Anda yakin ingin mengubah status buku ${bookTarget.title} menjadi "Belum selesai dibaca"?`
+  );
+  if (proceed) {
+    bookTarget.isFinished = false;
+  }
 
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
@@ -289,9 +298,8 @@ document.addEventListener(RENDER_EVENT, () => {
 });
 
 // event when save a changes
-document.addEventListener(SAVED_EVENT, () => {
-  alert("Anda telah melakukan perubahan");
-});
+// document.addEventListener(SAVED_EVENT, () => {
+// });
 
 // ===== behaviour card =====
 // toggle show dropdown setting card book
