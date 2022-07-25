@@ -26,10 +26,10 @@ const closeDropdownSetting = (btn, menu) => {
 const closeDropdownOutside = (btn, menu) => {
   for (let i = 0; i < btn.length; i++) {
     window.addEventListener("click", (e) => {
-      if (btn[i].contains(e.target)) {
-      } else {
-        menu[i].classList.remove("show");
-      }
+      // if (btn[i].contains(e.target)) {
+      // } else {
+      //   menu[i].classList.remove("show");
+      // }
     });
   }
 };
