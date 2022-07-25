@@ -157,6 +157,10 @@ const makeBookshelf = (bookObject) => {
   cardBook.setAttribute("id", `book-${id}`);
   cardBook.append(cardBookBody, settingBook, dropdownSetting);
 
+  // show dropdown setting card book
+  toggleDropdownSetting(settingBook, dropdownSetting);
+  // hide dropdown setting
+  closeDropdownOutside(settingBook, dropdownSetting);
   // event delete
   btnDelete.addEventListener("click", () => {
     // code
@@ -262,3 +266,20 @@ document.addEventListener(RENDER_EVENT, () => {
 document.addEventListener(SAVED_EVENT, () => {
   alert("Anda telah melakukan perubahan");
 });
+
+// ===== behaviour card =====
+// toggle show dropdown setting card book
+const toggleDropdownSetting = (btn, menu) => {
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("show");
+  });
+};
+// hide dropdown setting card book when clicking outside of the dropdown setting card book
+const closeDropdownOutside = (btn, menu) => {
+  window.addEventListener("click", (e) => {
+    if (btn.contains(e.target)) {
+    } else {
+      menu.classList.remove("show");
+    }
+  });
+};

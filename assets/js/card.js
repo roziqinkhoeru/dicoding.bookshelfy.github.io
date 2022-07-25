@@ -9,9 +9,11 @@ const toggleDropdownSetting = (btn, menu) => {
           menu[j].classList.remove("show");
         }
       }
+      alert("berhasil");
     });
   }
 };
+
 // hide dropdown setting card book when clicking a button dropdowns
 const closeDropdownSetting = (btn, menu) => {
   for (let i = 0; i < btn.length; i++) {
@@ -40,5 +42,5 @@ const dropdownCard = document.getElementsByClassName("dropdown_setting"),
   btnDropdownSetting = document.getElementsByClassName("btn_dropdown_setting");
 // call function toggle show dropdown setting card book
 toggleDropdownSetting(btnSetting, dropdownCard);
-closeDropdownSetting(btnDropdownSetting, dropdownCard);
-closeDropdownOutside(btnSetting, dropdownCard);
+// closeDropdownSetting(btnDropdownSetting, dropdownCard);
+// closeDropdownOutside(btnSetting, dropdownCard);
