@@ -134,6 +134,11 @@ const makeBookshelf = (bookObject) => {
     btnSwitch.append(switchIcon, btnSwitchValue);
     cardBookBody.append(cardBookBodyContent, statusBook);
     dropdownSetting.append(btnSwitch, btnDelete);
+
+    // move to ready event
+    btnSwitch.addEventListener("click", () => {
+      undoBookFromFinished(id);
+    });
   } else {
     // cretae an element
     const buttonBook = document.createElement("div"),
@@ -163,7 +168,7 @@ const makeBookshelf = (bookObject) => {
   closeDropdownOutside(settingBook, dropdownSetting);
   // event delete
   btnDelete.addEventListener("click", () => {
-    // code
+    deleteBook(id);
   });
 
   return cardBook;
@@ -206,6 +211,16 @@ const addBook = () => {
   saveData();
 };
 
+// method delete book
+function deleteBook(idBook) {
+  const bookTarget = findBookIndex(idBook);
+  if (bookTarget === -1) return;
+  books.splice(bookTarget, 1);
+
+  document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
+}
+
 // add book to finished book
 const addBookToFinished = (idBook) => {
   const bookTarget = findBook(idBook);
@@ -216,6 +231,17 @@ const addBookToFinished = (idBook) => {
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 };
+
+// add book to ready book
+function undoBookFromFinished(idBook) {
+  const bookTarget = findBook(idBook);
+  if (bookTarget == null) return;
+
+  bookTarget.isFinished = false;
+
+  document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
+}
 
 // load data form storage
 const loadDataFromStorage = () => {
