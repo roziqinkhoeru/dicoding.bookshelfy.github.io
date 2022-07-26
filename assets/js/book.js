@@ -4,14 +4,17 @@ const RENDER_EVENT = "render-bookshelf",
   // SAVED_EVENT = "saved-bookshelf",
   STORAGE_KEY = "BOOKSHELF_APPS";
 const formAddBook = document.getElementById("formAddBook"),
+  formNavSearch = document.getElementById("formNavSearch"),
   containerReadyBook = document.getElementById("containerReadyBook"),
   containerFinishedBook = document.getElementById("containerFinishedBook"),
   titleBook = document.getElementById("judul"),
   authorBook = document.getElementById("penulis"),
   yearBook = document.getElementById("tahun"),
   statusBook = document.getElementById("status"),
+  navSearch = document.getElementById("search"),
   btnReset = document.querySelector(".btn_reset");
 let isConfirmForm = false;
+let searchVal = "";
 
 // check storage exist
 const isStorageExist = () => {
@@ -345,6 +348,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // event search
+  formNavSearch.addEventListener("submit", (eve) => {
+    eve.preventDefault();
+    searchVal = navSearch.value;
+
+    document.dispatchEvent(new Event(RENDER_EVENT));
+  });
+
   // load data awal
   if (isStorageExist()) {
     loadDataFromStorage();
@@ -357,14 +368,19 @@ document.addEventListener(RENDER_EVENT, () => {
   containerReadyBook.innerHTML = "";
   containerFinishedBook.innerHTML = "";
 
-  for (bookItem of books) {
-    const bookElement = makeBookshelf(bookItem);
-    if (bookItem.isComplete) {
-      containerFinishedBook.append(bookElement);
-    } else {
-      containerReadyBook.append(bookElement);
-    }
-  }
+  // search with render
+  books
+    .filter((bookItem) =>
+      bookItem.title.toLowerCase().includes(searchVal.toLowerCase())
+    )
+    .map((bookItem) => {
+      const bookElement = makeBookshelf(bookItem);
+      if (bookItem.isComplete) {
+        containerFinishedBook.append(bookElement);
+      } else {
+        containerReadyBook.append(bookElement);
+      }
+    });
 });
 
 // event when save a changes
@@ -479,13 +495,16 @@ const removeErrorAll = () => {
   const errorTitle = document.querySelector("#judul+.error_container");
   const errorAuthor = document.querySelector("#penulis+.error_container");
   const errorYear = document.querySelector("#tahun+.error_container");
+  const errorStatus = document.querySelector("#status+.error_container");
   errorTitle.innerHTML = "";
   errorAuthor.innerHTML = "";
   errorYear.innerHTML = "";
+  errorStatus.innerHTML = "";
 
   titleBook.classList.remove("error");
   authorBook.classList.remove("error");
   yearBook.classList.remove("error");
+  statusBook.classList.remove("error");
 
   isConfirmForm = false;
 };
