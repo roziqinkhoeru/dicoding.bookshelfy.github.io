@@ -21,3 +21,7 @@ This program was created using **HTML (Hypertext Markup Language)**, **CSS (Casc
 - Responsives all devices
 - Modern user interface design
 - using LocalStorage
+
+## ⭐ Review
+
+![dicoding-review-khoeru-roziqin-submission](https://raw.githubusercontent.com/roziqinkhoeru/dicoding.bookshelfy.github.io/master/review.png)
