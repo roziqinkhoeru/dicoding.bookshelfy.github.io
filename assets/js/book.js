@@ -324,7 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const errorContainer = document.querySelector("#status+.error_container");
     errorContainer.innerHTML = "";
     if (isEmptyForm(statusBook)) {
-      errorContainer.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Status tidak boleh kosong</p>`;
+      errorContainer.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Pilih status baca Anda</p>`;
       statusBook.classList.add("error");
     } else {
       statusBook.classList.remove("error");
@@ -483,7 +483,7 @@ const validateFormAll = () => {
   }
   // statusbook
   if (isEmptyForm(statusBook)) {
-    errorStatus.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Status tidak boleh kosong</p>`;
+    errorStatus.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Pilih status baca Anda</p>`;
     statusBook.classList.add("error");
   } else {
     statusBook.classList.remove("error");
