@@ -9,7 +9,9 @@ const formAddBook = document.getElementById("formAddBook"),
   titleBook = document.getElementById("judul"),
   authorBook = document.getElementById("penulis"),
   yearBook = document.getElementById("tahun"),
-  statusBook = document.getElementById("status");
+  statusBook = document.getElementById("status"),
+  btnReset = document.querySelector(".btn_reset");
+let isConfirmForm = false;
 
 // check storage exist
 const isStorageExist = () => {
@@ -28,13 +30,13 @@ function generateId() {
 }
 
 // generate book object
-function generateBookObject(id, title, author, year, isFinished) {
+function generateBookObject(id, title, author, year, isComplete) {
   return {
     id,
     title,
     author,
     year,
-    isFinished,
+    isComplete,
   };
 }
 
@@ -64,12 +66,13 @@ const resetFormAddBook = () => {
   authorBook.value = "";
   yearBook.value = "";
   statusBook.value = "";
+  removeErrorAll();
 };
 
 // method make bookshelf
 const makeBookshelf = (bookObject) => {
   // object destructive
-  const { id, title, author, year, isFinished } = bookObject;
+  const { id, title, author, year, isComplete } = bookObject;
 
   // create an element
   const cardBook = document.createElement("div"),
@@ -109,7 +112,7 @@ const makeBookshelf = (bookObject) => {
   settingBook.append(dotThreeIcon);
   btnDelete.append(trashIcon, btnDeleteValue);
 
-  if (isFinished) {
+  if (isComplete) {
     // create an element
     const btnSwitch = document.createElement("button"),
       switchIcon = document.createElement("i"),
@@ -231,7 +234,7 @@ const addBookToFinished = (idBook) => {
   const bookTarget = findBook(idBook);
   if (bookTarget == null) return;
 
-  bookTarget.isFinished = true;
+  bookTarget.isComplete = true;
 
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
@@ -245,7 +248,7 @@ function undoBookFromFinished(idBook) {
     `Apakah Anda yakin ingin mengubah status buku ${bookTarget.title} menjadi "Belum selesai dibaca"?`
   );
   if (proceed) {
-    bookTarget.isFinished = false;
+    bookTarget.isComplete = false;
   }
 
   document.dispatchEvent(new Event(RENDER_EVENT));
@@ -268,11 +271,78 @@ const loadDataFromStorage = () => {
 
 // event load awal
 document.addEventListener("DOMContentLoaded", () => {
+  // validate title
+  titleBook.addEventListener("input", () => {
+    const errorContainer = document.querySelector("#judul+.error_container");
+    errorContainer.innerHTML = "";
+    if (isEmptyForm(titleBook)) {
+      errorContainer.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Judul tidak boleh kosong</p>`;
+      titleBook.classList.add("error");
+    } else {
+      titleBook.classList.remove("error");
+    }
+  });
+  // validate author
+  authorBook.addEventListener("input", () => {
+    const errorContainer = document.querySelector("#penulis+.error_container");
+    errorContainer.innerHTML = "";
+    if (isEmptyForm(authorBook)) {
+      errorContainer.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Penulis tidak boleh kosong</p>`;
+      authorBook.classList.add("error");
+    } else {
+      if (!isOnlyChar(authorBook)) {
+        errorContainer.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Penulis hanya dapat berisi huruf</p>`;
+        authorBook.classList.add("error");
+      } else {
+        authorBook.classList.remove("error");
+      }
+    }
+  });
+  // validate year
+  yearBook.addEventListener("input", () => {
+    const errorContainer = document.querySelector("#tahun+.error_container");
+    errorContainer.innerHTML = "";
+    if (isEmptyForm(yearBook)) {
+      errorContainer.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Tahun tidak boleh kosong</p>`;
+      yearBook.classList.add("error");
+    } else {
+      if (!isOnlyNumber(yearBook)) {
+        errorContainer.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Tahun hanya dapat berisi angka</p>`;
+        yearBook.classList.add("error");
+      } else {
+        yearBook.classList.remove("error");
+      }
+    }
+  });
+  // validate status
+  statusBook.addEventListener("click", () => {
+    const errorContainer = document.querySelector("#status+.error_container");
+    errorContainer.innerHTML = "";
+    if (isEmptyForm(statusBook)) {
+      errorContainer.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Status tidak boleh kosong</p>`;
+      statusBook.classList.add("error");
+    } else {
+      statusBook.classList.remove("error");
+    }
+  });
+  // event reset
+  btnReset.addEventListener("click", () => {
+    resetFormAddBook();
+  });
   // event submit
   formAddBook.addEventListener("submit", (eve) => {
     eve.preventDefault();
-    addBook();
-    resetFormAddBook();
+    // validate
+    if (validateFormAll()) {
+      isConfirmForm = true;
+    } else {
+      isConfirmForm = false;
+    }
+    //do
+    if (isConfirmForm) {
+      addBook();
+      resetFormAddBook();
+    }
   });
 
   // load data awal
@@ -289,7 +359,7 @@ document.addEventListener(RENDER_EVENT, () => {
 
   for (bookItem of books) {
     const bookElement = makeBookshelf(bookItem);
-    if (bookItem.isFinished) {
+    if (bookItem.isComplete) {
       containerFinishedBook.append(bookElement);
     } else {
       containerReadyBook.append(bookElement);
@@ -316,4 +386,106 @@ const closeDropdownOutside = (btn, menu) => {
       menu.classList.remove("show");
     }
   });
+};
+
+// validate
+const isEmptyForm = (field) => {
+  if (field.value === "") {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const isOnlyChar = (field) => {
+  if (!/^[a-zA-Z\s]*$/.test(field.value)) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const isOnlyNumber = (field) => {
+  if (!/^[0-9]*$/g.test(field.value)) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const validateFormAll = () => {
+  const errorTitle = document.querySelector("#judul+.error_container");
+  const errorAuthor = document.querySelector("#penulis+.error_container");
+  const errorYear = document.querySelector("#tahun+.error_container");
+  const errorStatus = document.querySelector("#status+.error_container");
+  errorTitle.innerHTML = "";
+  errorAuthor.innerHTML = "";
+  errorYear.innerHTML = "";
+  errorStatus.innerHTML = "";
+  // titlebook
+  if (isEmptyForm(titleBook)) {
+    errorTitle.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Judul tidak boleh kosong</p>`;
+    titleBook.classList.add("error");
+  } else {
+    titleBook.classList.remove("error");
+  }
+  // authorbook
+  if (isEmptyForm(authorBook)) {
+    errorAuthor.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Penulis tidak boleh kosong</p>`;
+    authorBook.classList.add("error");
+  } else {
+    if (!isOnlyChar(authorBook)) {
+      errorAuthor.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Penulis hanya dapat berisi huruf</p>`;
+      authorBook.classList.add("error");
+    } else {
+      authorBook.classList.remove("error");
+    }
+  }
+  // yearbook
+  if (isEmptyForm(yearBook)) {
+    errorYear.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Tahun tidak boleh kosong</p>`;
+    yearBook.classList.add("error");
+  } else {
+    if (!isOnlyNumber(yearBook)) {
+      errorYear.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Tahun hanya dapat berisi angka</p>`;
+      yearBook.classList.add("error");
+    } else {
+      yearBook.classList.remove("error");
+    }
+  }
+  // statusbook
+  if (isEmptyForm(statusBook)) {
+    errorStatus.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i><p>Status tidak boleh kosong</p>`;
+    statusBook.classList.add("error");
+  } else {
+    statusBook.classList.remove("error");
+  }
+  // return
+  if (
+    !isEmptyForm(titleBook) &&
+    !isEmptyForm(authorBook) &&
+    isOnlyChar(authorBook) &&
+    !isEmptyForm(yearBook) &&
+    isOnlyNumber(yearBook) &&
+    !isEmptyForm(statusBook)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const removeErrorAll = () => {
+  const errorTitle = document.querySelector("#judul+.error_container");
+  const errorAuthor = document.querySelector("#penulis+.error_container");
+  const errorYear = document.querySelector("#tahun+.error_container");
+  errorTitle.innerHTML = "";
+  errorAuthor.innerHTML = "";
+  errorYear.innerHTML = "";
+
+  titleBook.classList.remove("error");
+  authorBook.classList.remove("error");
+  yearBook.classList.remove("error");
+
+  isConfirmForm = false;
 };

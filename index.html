@@ -190,8 +190,8 @@
                     name="judul"
                     id="judul"
                     placeholder="Masukkan judul buku"
-                    required
                   />
+                  <div class="error_container"></div>
                 </div>
                 <!-- penulis -->
                 <div class="field_content" id="fieldPenulis">
@@ -202,8 +202,8 @@
                     name="penulis"
                     id="penulis"
                     placeholder="Masukkan nama penulis"
-                    required
                   />
+                  <div class="error_container"></div>
                 </div>
                 <!-- tahun -->
                 <div class="field_content" id="fieldTahun">
@@ -214,8 +214,8 @@
                     name="tahun"
                     id="tahun"
                     placeholder="Masukkan tahun terbit"
-                    required
                   />
+                  <div class="error_container"></div>
                 </div>
                 <!-- select status -->
                 <div class="field_content" id="fieldStatus">
@@ -225,6 +225,7 @@
                     <option value="selesai">Selesai</option>
                     <option value="belum">Belum selesai</option>
                   </select>
+                  <div class="error_container"></div>
                 </div>
               </div>
               <hr />
@@ -300,5 +301,6 @@
     ></script>
     <script src="assets/js/book.js"></script>
     <script src="assets/js/nav.js"></script>
+    <script src="assets/js/validation.js"></script>
   </body>
 </html>

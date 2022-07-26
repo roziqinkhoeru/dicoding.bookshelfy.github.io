@@ -624,6 +624,11 @@ section {
   border: 0.125rem solid #5553c0f5;
 }
 
+.input_field.error,
+.input_field.error:focus {
+  border: 0.125rem solid #f65e49f5;
+}
+
 /* ready book section */
 .card_body_container {
   display: grid;
@@ -803,4 +808,26 @@ footer {
   font-size: 0.875rem;
 
   text-align: center;
+}
+
+.error_container {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-left: 0.25rem;
+}
+
+.error_container svg {
+  margin-right: 0.3rem;
+  font-size: 0.875rem;
+}
+
+.error_container path {
+  color: var(--danger);
+}
+
+.error_container p {
+  font-size: 0.825rem;
+  color: var(--danger);
+  transform: translateY(0.8px);
 }
