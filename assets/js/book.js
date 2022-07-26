@@ -5,6 +5,7 @@ const RENDER_EVENT = "render-bookshelf",
   STORAGE_KEY = "BOOKSHELF_APPS";
 const formAddBook = document.getElementById("formAddBook"),
   formNavSearch = document.getElementById("formNavSearch"),
+  formDropdownSearch = document.getElementById("formDropdownSearch"),
   containerReadyBook = document.getElementById("containerReadyBook"),
   containerFinishedBook = document.getElementById("containerFinishedBook"),
   titleBook = document.getElementById("judul"),
@@ -12,6 +13,7 @@ const formAddBook = document.getElementById("formAddBook"),
   yearBook = document.getElementById("tahun"),
   statusBook = document.getElementById("status"),
   navSearch = document.getElementById("search"),
+  dropdownSearch = document.getElementById("searchDropdown"),
   btnReset = document.querySelector(".btn_reset");
 let isConfirmForm = false;
 let searchVal = "";
@@ -351,7 +353,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // event search
   formNavSearch.addEventListener("submit", (eve) => {
     eve.preventDefault();
+    dropdownSearch.value = "";
     searchVal = navSearch.value;
+
+    document.dispatchEvent(new Event(RENDER_EVENT));
+  });
+  // event serach dropdown
+  formDropdownSearch.addEventListener("submit", (eve) => {
+    eve.preventDefault();
+    navSearch.value = "";
+    searchVal = dropdownSearch.value;
+    hideMenu();
 
     document.dispatchEvent(new Event(RENDER_EVENT));
   });
@@ -507,4 +519,16 @@ const removeErrorAll = () => {
   statusBook.classList.remove("error");
 
   isConfirmForm = false;
+};
+
+// hide dropdown menu mobile
+const hideMenu = () => {
+  const navDropdownContent = document.querySelector(".nav_dropdown_content"),
+    navScreen = document.querySelector(".nav_dropdown_screen");
+
+  navDropdownContent.classList.remove("active");
+  navScreen.classList.remove("active");
+  navScreen.style.pointerEvents = "none";
+  document.querySelector("html").style.overflow = "auto";
+  document.querySelector("html").style.height = "auto";
 };
